@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Governed (APCK) Grok + free-cognition hybrid agent. Stdlib core, Termux-first, $0."
 readme = "README.md"
 license = { text = "MIT" }
-authors = [{ name = "governed-agent-engine contributors" }]
+authors = [{ name = "Jonathan D Battles" }]
 requires-python = ">=3.11"
 # Exactly one runtime dependency, and it is pure-Python-capable (no compiler needed on Termux).
 dependencies = ["PyYAML>=6.0"]

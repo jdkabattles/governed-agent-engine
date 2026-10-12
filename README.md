@@ -107,4 +107,4 @@ configurable. See `docs/private_deployment.md`.
 
 ## License
 
-MIT. See `LICENSE`. Borrowed ideas and licence notes: `docs/references.md`.
+MIT © 2026 Jonathan D Battles. See `LICENSE`. Borrowed ideas and licence notes: `docs/references.md`.
