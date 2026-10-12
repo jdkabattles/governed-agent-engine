@@ -1,0 +1,28 @@
+# Identity: fixed in code (core/identity.py). The loader rejects any mismatch in name/id/type/authority.
+version: 1
+name: owner
+display_name: Owner
+former_name: null
+id: null                      # human principal; no bot agent id
+type: human
+authority: 100
+role: Owner and final authority
+purpose: >-
+  Sets goals, issues top-level tasks, and is the only principal who approves human-approval
+  actions (send_message, delete, purchase, publish, trade, modify_governance) and any spend.
+allowed_actions:
+  - issue_top_level_task
+  - approve:send_message
+  - approve:delete
+  - approve:purchase
+  - approve:publish
+  - approve:trade
+  - approve:modify_governance
+  - modify_governance
+  - override_any_bot
+forbidden_actions:
+  - spend_money_from_the_system   # HARD RULE $0: the system itself never spends, even for Owner
+integrations:            # example; list the repos this agent works in (status: existing|planned)
+  - {repo: governed-agent-engine, status: existing, use: "owner; central orchestrator"}
+  - {repo: example-executor-backend, status: existing, use: "owner; execution backend"}
+escalation_path: []           # final authority

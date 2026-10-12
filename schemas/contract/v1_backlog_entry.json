@@ -1,0 +1,23 @@
+{
+  "created_at": "2026-10-10T12:00:00Z",
+  "entry_id": "20261010T120000Z-t1-aaaaaaaaaaaa",
+  "plan_path": null,
+  "requires_human_approval": false,
+  "schema_version": 1,
+  "status": "pending",
+  "status_history": [
+    [
+      "pending",
+      "2026-10-10T12:00:00Z"
+    ]
+  ],
+  "task": {
+    "action": "plan",
+    "human_approval": false,
+    "inputs": {},
+    "priority": "normal",
+    "requires_grok": false,
+    "task_id": "t1",
+    "type": "custom"
+  }
+}

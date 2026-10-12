@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "governed-agent-engine"
+version = "0.1.0"
+description = "Governed (APCK) Grok + free-cognition hybrid agent. Stdlib core, Termux-first, $0."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "governed-agent-engine contributors" }]
+requires-python = ">=3.11"
+# Exactly one runtime dependency, and it is pure-Python-capable (no compiler needed on Termux).
+dependencies = ["PyYAML>=6.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-cov>=5", "ruff>=0.6", "mypy>=1.10", "types-PyYAML", "jsonschema>=4"]
+
+[project.scripts]
+gae = "governed_agent_engine.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/governed_agent_engine"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "N", "SIM", "RUF", "S", "PT", "C4"]
+ignore = ["S101", "RUF012"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S", "N802", "PT011"]
+"scripts/**" = ["S", "T201"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers --cov=governed_agent_engine --cov-report=term-missing --cov-fail-under=85"
+
+[tool.coverage.run]
+branch = true
+source = ["governed_agent_engine"]

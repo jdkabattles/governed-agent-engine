@@ -1,0 +1,29 @@
+# APCK governance. Loaded once, fingerprinted; any change while running halts the agent.
+version: 1
+artifacts:                      # A
+  write_roots: [artifacts]
+  require_evidence_for_done: true
+process:                        # P
+  lifecycle: [intake, normalize, validate, route, execute, backlog, replay, evidence]
+  allowed_task_types: [market_watch, repo_maintain, email_triage, governance_check, research, custom]
+  # Hard-coded floor (send_message, delete, purchase, publish, trade, modify_governance) is
+  # always included; entries here can only ADD to it.
+  human_approval_required: []
+  # Top-level tasks must be issued by a human identity with at least this authority
+  # (core/identity.py: owner=100, grok=10, cognition=1). Bounded to 50..100.
+  min_top_level_authority: 100
+  overseer_may_issue_top_level: false   # overseer (overseer, 50) never starts top-level work unless true; can never approve
+constraints:                    # C
+  allowed_actions: [plan, summarize, research, read_repo, write_artifact, validate_code,
+                    send_message, delete, purchase, publish, trade, modify_governance]
+  max_recursion_depth: 3
+  max_inputs_bytes: 65536
+  cost_ceiling_usd: 0.0         # HARD RULE: $0
+  governance_mutable: false     # must be false
+knowledge:                      # K
+  allowed_endpoints: [pollinations, llm7, ovh, openrouter, gemini, ai_horde,
+                      openrouter_nemotron_super, openrouter_gemma4_31b, openrouter_north_code,
+                      openrouter_laguna_s, groq_gpt_oss_120b, groq_qwen3_8_27b,
+                      groq_gpt_oss_20b]
+  allow_sensitive_to_third_party: false   # sensitive tasks never go to third_party_proxy/community
+  cognition_is_advisory: true             # free LLMs plan; they never execute

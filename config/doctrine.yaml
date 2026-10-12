@@ -1,0 +1,12 @@
+# EXAMPLE doctrine. Enforced on every plan before it reaches the backlog
+# (see docs/doctrine.md). The statement must stay verbatim; the loader rejects edits.
+version: 1
+statement: >-
+  Example doctrine: do the work completely, ground every claim in evidence, analyse every failure, and improve after each run.
+truth_priority: 1               # 1 = truth outranks speed, brevity and convenience (only value allowed)
+evidence_required: true         # execute/verify steps must declare evidence; execution must produce it
+laziness_penalty: 0.5           # a model whose plan is rejected has its routing utility x0.5 (per rejection, per session)
+failure_analysis_required: true # execute steps must list failure modes; every rejection is recorded as evidence
+improvement_loop: true          # every plan needs a kind=improve step after a kind=verify step
+min_steps: 3                    # fewer steps than this is treated as lazy
+min_step_chars: 12              # step descriptions shorter than this are treated as lazy

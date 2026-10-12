@@ -1,0 +1,19 @@
+# doctrine.grok — doctrine (.grok = strict YAML subset, docs/grok_format.md).
+# STATEMENT must match core/doctrine.py and doctrine/doctrine.yaml verbatim. RULES and
+# OPERATIONAL_REQUIREMENTS are the owner's wording verbatim (words quoted only because .grok
+# requires double-quoted strings); "at least N steps" must equal doctrine.yaml min_plan_steps.
+# A mismatch blocks startup.
+FORMAT: "grok/1"
+STATEMENT: "Example doctrine: do the work completely, ground every claim in evidence, analyse every failure, and improve after each run."
+RULES:
+  TRUTH_PRIORITY: "high"
+  EVIDENCE_REQUIRED: true
+  LAZINESS_PENALTY: "high"
+  FAILURE_ANALYSIS_REQUIRED: true
+  IMPROVEMENT_LOOP: "mandatory"
+OPERATIONAL_REQUIREMENTS:
+  - "Plans must contain at least 3 steps."
+  - "Every step must require evidence unless exempt."
+  - "At least one step must include failure_modes."
+  - "At least one step must include an improvement action."
+  - "All actions must produce artifacts: logs, evidence, structured outputs."

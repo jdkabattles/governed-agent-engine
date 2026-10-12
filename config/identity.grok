@@ -1,0 +1,54 @@
+# identity.grok — multi-agent identity block (.grok = strict YAML subset, docs/grok_format.md).
+# Must agree with core/identity.py and identities/*.yaml; a mismatch blocks startup.
+FORMAT: "grok/1"
+SYSTEM: "multi-agent"
+FINAL_AUTHORITY: "owner"
+COGNITION_ENDPOINT_AUTHORITY: 1   # every free model endpoint acts as cognition:<endpoint>
+IDENTITIES:
+  OWNER:
+    NAME: "owner"
+    DISPLAY_NAME: "Owner"
+    FORMER_NAME: null
+    ID: null
+    TYPE: "human"
+    AUTHORITY: 100
+  OVERSEER_OVERSEER:
+    NAME: "overseer"
+    DISPLAY_NAME: "Overseer Agent"
+    FORMER_NAME: null
+    ID: "00000000-0000-4000-8000-000000000050"
+    TYPE: "overseer"
+    AUTHORITY: 50
+  GROK_EXECUTOR:
+    NAME: "grok"
+    DISPLAY_NAME: "Executor Agent"
+    FORMER_NAME: null
+    ID: "00000000-0000-4000-8000-000000000010"
+    TYPE: "executor"
+    AUTHORITY: 10
+  ACQUIRER_SENTINEL:
+    NAME: "acquirer"
+    DISPLAY_NAME: "Acquisition Agent"
+    FORMER_NAME: null
+    ID: "00000000-0000-4000-8000-000000000005"
+    TYPE: "acquisition"
+    AUTHORITY: 5
+  ANALYST_COGNITION_NODE:
+    NAME: "analyst"
+    DISPLAY_NAME: "Analyst Agent"
+    FORMER_NAME: null
+    ID: "00000000-0000-4000-8000-000000000003"
+    TYPE: "cognition"
+    AUTHORITY: 3
+BOUNDS:
+  # "Never override Overseer Agent" applies to bots below 50. It is bounded: Overseer cannot
+  # override Owner and can never approve human-approval actions.
+  OVERSEER_CANNOT_OVERRIDE: "owner"
+  HUMAN_APPROVAL_ACTIONS:
+    - "send_message"
+    - "delete"
+    - "purchase"
+    - "publish"
+    - "trade"
+    - "modify_governance"
+  APPROVER: "owner"

@@ -1,0 +1,11 @@
+{
+  "task_id": "example-research-1",
+  "type": "research",
+  "action": "plan",
+  "issued_by": "owner",
+  "priority": "normal",
+  "inputs": {
+    "goal": "Outline a blog post comparing free, no-cost AI API tiers",
+    "constraints": ["$0 budget", "cite sources", "facts only"]
+  }
+}

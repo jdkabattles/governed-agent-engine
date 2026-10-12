@@ -1,0 +1,217 @@
+# All endpoints are $0. Keys come ONLY from environment variables.
+# Free endpoints, verified live when added (run `gae smoke` to re-check).
+health:
+  failure_threshold: 3   # consecutive failures before an endpoint is benched
+  cooldown_s: 600
+endpoints:
+  # ------------------------------------------------------------- verified, enabled
+  pollinations:
+    kind: openai_compat
+    base_url: https://text.pollinations.ai/openai
+    chat_path: ""
+    model: openai
+    rpm: 10                 # unpublished; conservative
+    trust: first_party
+    status: verified
+    verified: "2026-10-10"
+  llm7:
+    kind: openai_compat
+    base_url: https://api.llm7.io/v1
+    model: default
+    rpm: 10                 # unpublished; conservative
+    trust: third_party_proxy
+    status: verified
+    verified: "2026-10-10"
+    notes: third-party proxy; never receives sensitive tasks
+  ovh:
+    kind: openai_compat
+    base_url: https://oai.endpoints.kepler.ai.cloud.ovh.net/v1
+    model: Meta-Llama-3_3-70B-Instruct
+    rpm: 2                  # anonymous tier
+    trust: first_party
+    status: verified
+    verified: "2026-10-10"
+  openrouter:
+    kind: openai_compat
+    base_url: https://openrouter.ai/api/v1
+    model: openrouter/free
+    auth: bearer
+    api_key_env: OPENROUTER_API_KEY
+    rpm: 20
+    rpd: 50
+    trust: third_party_proxy
+    rate_group: openrouter
+    status: verified
+    verified: "2026-10-10"
+  # Explicit OpenRouter :free models (share the openrouter quota via rate_group).
+  # Enumerated from https://openrouter.ai/api/v1/models on 2026-10-11; benchmarked.
+  openrouter_nemotron_super:
+    kind: openai_compat
+    base_url: https://openrouter.ai/api/v1
+    model: nvidia/nemotron-3-super-120b-a12b:free
+    auth: bearer
+    api_key_env: OPENROUTER_API_KEY
+    rpm: 20
+    rpd: 50
+    timeout_s: 120
+    trust: third_party_proxy
+    rate_group: openrouter
+    status: benchmarked
+    verified: "2026-10-11"
+  openrouter_gemma4_31b:
+    kind: openai_compat
+    base_url: https://openrouter.ai/api/v1
+    model: google/gemma-4-31b-it:free
+    auth: bearer
+    api_key_env: OPENROUTER_API_KEY
+    rpm: 20
+    rpd: 50
+    timeout_s: 120
+    trust: third_party_proxy
+    rate_group: openrouter
+    enabled: false
+    status: "unavailable: HTTP 429 (upstream) on every attempt, 2026-10-11"
+    verified: "2026-10-11"
+  openrouter_north_code:
+    kind: openai_compat
+    base_url: https://openrouter.ai/api/v1
+    model: cohere/north-mini-code:free
+    auth: bearer
+    api_key_env: OPENROUTER_API_KEY
+    rpm: 20
+    rpd: 50
+    timeout_s: 120
+    trust: third_party_proxy
+    rate_group: openrouter
+    status: benchmarked
+    verified: "2026-10-11"
+  openrouter_laguna_s:
+    kind: openai_compat
+    base_url: https://openrouter.ai/api/v1
+    model: poolside/laguna-s-2.1:free
+    auth: bearer
+    api_key_env: OPENROUTER_API_KEY
+    rpm: 20
+    rpd: 50
+    timeout_s: 120
+    trust: third_party_proxy
+    rate_group: openrouter
+    status: benchmarked
+    verified: "2026-10-11"
+  # Groq free tier (key: GROQ_API_KEY). Live x-ratelimit-* headers are honored at runtime.
+  groq_gpt_oss_120b:
+    kind: openai_compat
+    base_url: https://api.groq.com/openai/v1
+    model: openai/gpt-oss-120b
+    auth: bearer
+    api_key_env: GROQ_API_KEY
+    rpm: 20                 # not exposed in headers; conservative
+    rpd: 1000               # x-ratelimit-limit-requests (per model)
+    tpm: 8000               # x-ratelimit-limit-tokens (per model, per minute), same evidence file
+    timeout_s: 60
+    trust: first_party      # Groq serves the model itself (no proxy)
+    status: verified
+    verified: "2026-10-11"
+  groq_qwen3_8_27b:
+    kind: openai_compat
+    base_url: https://api.groq.com/openai/v1
+    model: qwen/qwen3.8-27b
+    auth: bearer
+    api_key_env: GROQ_API_KEY
+    rpm: 20                 # not exposed in headers; conservative
+    rpd: 1000               # x-ratelimit-limit-requests (per model)
+    tpm: 8000               # x-ratelimit-limit-tokens (per model, per minute), same evidence file
+    timeout_s: 60
+    trust: first_party      # Groq serves the model itself (no proxy)
+    status: verified
+    verified: "2026-10-11"
+  groq_gpt_oss_20b:
+    kind: openai_compat
+    base_url: https://api.groq.com/openai/v1
+    model: openai/gpt-oss-20b
+    auth: bearer
+    api_key_env: GROQ_API_KEY
+    rpm: 20                 # not exposed in headers; conservative
+    rpd: 1000               # x-ratelimit-limit-requests (per model)
+    tpm: 8000               # x-ratelimit-limit-tokens (per model, per minute), same evidence file
+    timeout_s: 60
+    trust: first_party      # Groq serves the model itself (no proxy)
+    status: verified
+    verified: "2026-10-11"
+  gemini:
+    kind: gemini
+    base_url: https://generativelanguage.googleapis.com/v1beta
+    model: gemini-3.8-flash
+    auth: header_key
+    api_key_env: GEMINI_API_KEY
+    rpm: 10                 # Google no longer publishes free numbers; conservative
+    rpd: 20                 # inferred 2026-10-11: persistent 429 after ~28 req (9 ok); not published
+    timeout_s: 90           # thinking model + long-context items; 30s timed out under load 2026-10-11
+    trust: first_party
+    status: verified
+    verified: "2026-10-10"
+  ai_horde:
+    kind: ai_horde
+    base_url: https://aihorde.net/api/v2
+    model: any
+    auth: header_apikey
+    api_key_env: AI_HORDE_API_KEY
+    default_api_key: "0000000000"   # public anonymous key (lowest priority, slow)
+    rpm: 2
+    timeout_s: 300
+    trust: community
+    status: verified
+    verified: "2026-10-10"
+  # ------------------------------------------------------------- code validation
+  judge0:
+    kind: judge0
+    base_url: https://ce.judge0.com
+    model: python3
+    rpm: 2                  # public CE instance: LIGHT USE ONLY
+    trust: community
+    status: verified
+    verified: "2026-10-10"
+  # ------------------------------------- the user's original list: kept, DISABLED, with why
+  blackbox:
+    kind: openai_compat
+    base_url: https://www.blackbox.ai/api
+    chat_path: /chat
+    model: n/a
+    rpm: 1
+    enabled: false
+    status: "dead: returns website HTML, no public API (verified 2026-10-10)"
+    verified: "2026-10-10"
+  puter:
+    kind: openai_compat
+    base_url: https://api.puter.com/v2/ai
+    chat_path: /chat
+    model: n/a
+    rpm: 1
+    enabled: false
+    status: "dead: 404; AI only via browser SDK + user login (verified 2026-10-10)"
+    verified: "2026-10-10"
+  deepinfra_anon:
+    kind: openai_compat
+    base_url: https://api.deepinfra.com/v1/openai
+    model: meta-llama/Llama-3.3-70B-Instruct
+    rpm: 1
+    enabled: false
+    status: "keyed: 'missing API key' without auth (verified 2026-10-10)"
+    verified: "2026-10-10"
+  huggingface_serverless:
+    kind: openai_compat
+    base_url: https://api-inference.huggingface.co/models
+    model: Qwen/Qwen2.5-Coder-32B-Instruct
+    rpm: 1
+    enabled: false
+    status: "dead: endpoint shut down; HF free accounts now have $0 credits (verified 2026-10-10)"
+    verified: "2026-10-10"
+  koboldai_net:
+    kind: openai_compat
+    base_url: https://koboldai.net/api/v1
+    chat_path: /generate
+    model: n/a
+    rpm: 1
+    enabled: false
+    status: "dead: redirects only; use ai_horde (aihorde.net) instead (verified 2026-10-10)"
+    verified: "2026-10-10"

@@ -1,0 +1,14 @@
+# References and borrowed ideas
+
+No source code was copied from any of the projects below. Only design ideas were adopted,
+re-implemented from scratch in this repo (MIT). Licences were checked on 2026-10-10 via the
+GitHub API.
+
+| Source | Licence | MIT-compatible? | Ideas adopted (re-implemented) | Where |
+|---|---|---|---|---|
+| [NousResearch/overseer-agent](https://github.com/NousResearch/overseer-agent) | MIT | yes (code reuse would need the MIT notice; we reused none) | **Termux strategy**: never compile native deps on the phone (Overseer ships CI-built `android_24_arm64_v8a` wheels in a signed `pkg`); we go further and have no native deps. **One-command installer** (`curl … install.sh \| bash`) with a separate Termux path. **"Narrow waist, capability at the edges"**: small core, providers added as config/adapters, not core changes. **`.env` for secrets only, behaviour in YAML config** (we use env vars for keys only). **Provider switching without code changes** (our `endpoints.yaml` + `routing.yaml`). **Hierarchical `AGENTS.md`** for coding agents (our root `AGENTS.md`). | `termux/install.sh`, `docs/decisions/ADR-001-language.md`, `config/*.yaml`, `AGENTS.md` |
+| [xai-org/xai-sdk-python](https://github.com/xai-org/xai-sdk-python) | Apache-2.0 | yes for ideas; copying code would require Apache-2.0 notices (none copied) | **Client reads its key from an env var by default** (`XAI_API_KEY` there; `OPENROUTER_API_KEY`/`GEMINI_API_KEY` here), never hard-coded. **Sync client with an explicit, swappable transport** (they offer sync/async gRPC clients; we keep one sync `HttpClient` protocol so tests and Termux use the same seam). The SDK itself is **not** used: the xAI API is paid, which violates the $0 rule, and Grok Bot (the agent) has no inbound API anyway. | `cognition/base.py`, `cognition/http.py` |
+| [Cursor docs: Rules / AGENTS.md](https://cursor.com/docs/context/rules) | docs (no code) | n/a | **Version-controlled agent instructions** in `AGENTS.md` (plain markdown, nested per directory allowed), focused and short; reference files instead of copying them. | `AGENTS.md` |
+| Cursor docs: background / cloud agents | docs (no code) | n/a | **Asynchronous agents that work from the repo and report back through artifacts** — the same shape as our Grok handoff: work is queued as files in git, an agent pulls, executes, and pushes evidence. | `grok/client.py`, `docs/architecture.md` |
+| [termux/termux-docker](https://github.com/termux/termux-docker) | Apache-2.0 (image used only for testing; nothing redistributed) | n/a | Official Termux rootfs used under `proot -q qemu-aarch64` to verify the installer. | `docs/termux_verification.md` |
+| example-executor-backend (same author) | MIT | same owner | Router, usage-state, backlog, token-bucket, adapter and test patterns, ported from Pydantic to stdlib dataclasses. | throughout |

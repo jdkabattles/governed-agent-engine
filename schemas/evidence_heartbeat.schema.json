@@ -1,0 +1,30 @@
+{
+  "$id": "evidence_heartbeat.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "agent": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "schema_version": {
+      "description": "contract version; writers emit 2, readers accept 1 and 2",
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
+    },
+    "ts": {
+      "format": "date-time",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ts"
+  ],
+  "title": "Heartbeat",
+  "type": "object"
+}

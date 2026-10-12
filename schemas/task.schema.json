@@ -1,0 +1,74 @@
+{
+  "$id": "task.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "maxLength": 64,
+      "minLength": 1,
+      "type": "string"
+    },
+    "depth": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "human_approval": {
+      "type": "boolean"
+    },
+    "inputs": {
+      "type": "object"
+    },
+    "issued_by": {
+      "description": "identity name (core/identity.py); top-level tasks need a human issuer",
+      "maxLength": 128,
+      "type": "string"
+    },
+    "parent_task_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "priority": {
+      "enum": [
+        "high",
+        "normal",
+        "low"
+      ]
+    },
+    "provenance": {
+      "description": "ancestor task ids, root first; length == depth",
+      "items": {
+        "pattern": "^[A-Za-z0-9_.\\-]{1,128}$",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "requires_grok": {
+      "type": "boolean"
+    },
+    "sensitive": {
+      "type": "boolean"
+    },
+    "task_id": {
+      "pattern": "^[A-Za-z0-9_.\\-]{1,128}$",
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "market_watch",
+        "repo_maintain",
+        "email_triage",
+        "governance_check",
+        "research",
+        "custom"
+      ]
+    }
+  },
+  "required": [
+    "task_id",
+    "type"
+  ],
+  "title": "Task",
+  "type": "object"
+}

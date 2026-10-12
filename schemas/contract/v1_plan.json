@@ -1,0 +1,15 @@
+{
+  "created_at": "2026-10-10T12:00:00Z",
+  "model": "openai",
+  "provider": "pollinations",
+  "raw_text": "S\n1. a",
+  "steps": [
+    {
+      "action": "plan",
+      "description": "a",
+      "index": 0
+    }
+  ],
+  "summary": "S",
+  "task_id": "t1"
+}

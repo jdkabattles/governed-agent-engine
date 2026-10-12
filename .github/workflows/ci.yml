@@ -1,0 +1,52 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      - name: Ruff lint
+        run: ruff check .
+      - name: Ruff format
+        run: ruff format --check .
+      - name: Mypy (strict)
+        run: mypy
+      - name: Pytest + coverage (>=85%)
+        run: pytest
+      - name: Shell syntax
+        run: bash -n termux/install.sh && bash -n termux/run.sh
+
+  stdlib-only-install:
+    # Proves the runtime install needs nothing but PyYAML (what Termux gets).
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install without binary wheels for PyYAML (pure-Python fallback)
+        run: |
+          python -m venv /tmp/v
+          /tmp/v/bin/pip install --no-binary pyyaml -e .
+          /tmp/v/bin/pip list
+          GAE_ROOT=$PWD /tmp/v/bin/python -m governed_agent_engine validate
+          GAE_ROOT=$PWD /tmp/v/bin/python -m governed_agent_engine status

@@ -1,0 +1,34 @@
+version: 1
+name: acquirer
+display_name: Acquisition Agent
+former_name: null
+id: 00000000-0000-4000-8000-000000000005
+type: acquisition
+authority: 5
+role: Acquisition
+purpose: >-
+  Acquires data with approved, zero-cost tools and reports what it collected. Example agent.
+allowed_actions:
+  - scrape_public_data
+  - run_free_apify_actor
+  - build_actor_locally
+  - run_data_pipeline
+  - write_artifact
+  - write_evidence
+  - issue_child_task          # within max_recursion_depth, with provenance to a human root
+forbidden_actions:
+  - issue_top_level_task
+  - publish_without_owner
+  - push_to_apify_without_owner
+  - change_pricing
+  - spend                     # $0 only: no paid actors, proxies or plans
+  - approve:send_message
+  - approve:delete
+  - approve:purchase
+  - approve:publish
+  - approve:trade
+  - approve:modify_governance
+  - modify_governance
+integrations:            # example; list the repos this agent works in (status: existing|planned)
+  - {repo: governed-agent-engine, status: existing, use: "example: works through this engine's backlog and artifacts"}
+escalation_path: [overseer, owner]

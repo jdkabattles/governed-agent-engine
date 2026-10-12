@@ -1,0 +1,24 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+*.key
+.keys/
+secrets/
+dist/
+build/
+*.egg-info/
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+# runtime artifacts (keep dirs via .gitkeep; committed evidence/backlog is the Grok handoff)
+artifacts/logs/*
+!artifacts/logs/.gitkeep
+artifacts/metrics/*
+!artifacts/metrics/.gitkeep
+artifacts/inbox/processed/
+artifacts/inbox/rejected/

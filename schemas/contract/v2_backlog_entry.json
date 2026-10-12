@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-10-11T12:00:00Z",
+  "entry_id": "20261011T120000Z-child-1-abc123def456",
+  "executor": "cognition",
+  "plan_path": "plans/20261011T120000Z-child-1-abc123def456.plan.json",
+  "requires_human_approval": false,
+  "schema_version": 2,
+  "status": "pending",
+  "status_history": [
+    {
+      "at": "2026-10-11T12:00:00+00:00",
+      "status": "pending"
+    }
+  ],
+  "task": {
+    "action": "plan",
+    "depth": 1,
+    "human_approval": false,
+    "inputs": {
+      "q": "x"
+    },
+    "issued_by": "cognition:ovh",
+    "parent_task_id": "root-1",
+    "priority": "normal",
+    "provenance": [
+      "root-1"
+    ],
+    "requires_grok": false,
+    "sensitive": false,
+    "task_id": "child-1",
+    "type": "research"
+  }
+}

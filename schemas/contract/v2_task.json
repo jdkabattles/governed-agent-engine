@@ -1,0 +1,18 @@
+{
+  "action": "plan",
+  "depth": 1,
+  "human_approval": false,
+  "inputs": {
+    "q": "x"
+  },
+  "issued_by": "cognition:ovh",
+  "parent_task_id": "root-1",
+  "priority": "normal",
+  "provenance": [
+    "root-1"
+  ],
+  "requires_grok": false,
+  "sensitive": false,
+  "task_id": "child-1",
+  "type": "research"
+}

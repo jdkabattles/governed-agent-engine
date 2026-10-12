@@ -1,0 +1,30 @@
+# Multi-agent operating doctrine. The statement is pinned in code (core/doctrine.py) and must stay
+# verbatim. Machine-enforced knobs for plans live in config/doctrine.yaml; this file states the
+# operational rules every bot follows and is checked for presence, shape and tampering.
+version: 1
+statement: >-
+  Example doctrine: do the work completely, ground every claim in evidence, analyse every failure, and improve after each run.
+rules:
+  anti_laziness:
+    min_plan_steps: 3              # mirrors config/doctrine.yaml min_steps (checked)
+    min_step_chars: 12             # mirrors config/doctrine.yaml min_step_chars (checked)
+    require_gather_before_execute: true
+    no_filler_or_duplicate_steps: true
+  truth_and_evidence:
+    facts_over_guesses: true       # say "unknown" rather than invent
+    cite_evidence: true            # claims point at artifacts/evidence or sources
+    evidence_required_for_execute_and_verify: true
+    done_without_evidence_is_failed: true
+  failure_modes:
+    list_failure_modes_for_execute_steps: true
+    record_every_rejection_as_evidence: true
+    analyse_failures_before_retry: true
+  improvement:
+    mandatory_improve_step_after_verify: true   # enforced on kind == "improve", never on words
+    feed_lessons_into_next_plan: true
+  wisdom:
+    principle: knowledge -> understanding -> improved action
+    stages:
+      - {stage: knowledge, means: gather the facts and evidence we are given}
+      - {stage: understanding, means: analyse and verify them until they explain the result}
+      - {stage: improved_action, means: act on that understanding and improve the next attempt}

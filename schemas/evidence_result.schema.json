@@ -1,0 +1,54 @@
+{
+  "$id": "evidence_result.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "entry_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "outputs": {
+      "type": "object"
+    },
+    "schema_version": {
+      "description": "contract version; writers emit 2, readers accept 1 and 2",
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
+    },
+    "started_at": {
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "done",
+        "failed"
+      ]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "task_id": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "entry_id",
+    "task_id",
+    "status",
+    "finished_at"
+  ],
+  "title": "GrokResult (evidence)",
+  "type": "object"
+}

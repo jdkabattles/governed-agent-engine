@@ -1,0 +1,15 @@
+{
+  "entry_id": "20261011T120000Z-child-1-abc123def456",
+  "finished_at": "2026-10-11T12:00:00Z",
+  "outputs": {
+    "evidence": {
+      "1": "artifacts/evidence/x/step1.md",
+      "2": "artifacts/evidence/x/step2.md"
+    }
+  },
+  "schema_version": 2,
+  "started_at": "2026-10-11T12:00:00Z",
+  "status": "done",
+  "summary": "ok",
+  "task_id": "child-1"
+}

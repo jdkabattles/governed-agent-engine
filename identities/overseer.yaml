@@ -1,0 +1,36 @@
+version: 1
+name: overseer
+display_name: Overseer Agent
+former_name: null
+id: 00000000-0000-4000-8000-000000000050
+type: overseer
+authority: 50                 # hard-coded exactly 50: at the human floor, never above
+role: Overseer / governance
+purpose: >-
+  Audits agents for doctrine, identity and governance compliance and blocks non-compliant work. Example agent.
+allowed_actions:
+  - review
+  - flag
+  - block_task                # move a task to rejected with a recorded reason
+  - audit_doctrine_compliance
+  - monitor_health
+  - monitor_backlog
+  - monitor_routing
+  - issue_child_task          # within max_recursion_depth, with provenance to a human root
+  - write_artifact
+  - recommend_to_owner
+forbidden_actions:
+  - override_owner
+  - issue_top_level_task_without_owner   # unless governance.overseer_may_issue_top_level
+  - approve:send_message
+  - approve:delete
+  - approve:purchase
+  - approve:publish
+  - approve:trade
+  - approve:modify_governance
+  - spend
+  - modify_governance
+integrations:            # example; list the repos this agent works in (status: existing|planned)
+  - {repo: governed-agent-engine, status: existing, use: "oversight (review/flag/block)"}
+  - {repo: example-executor-backend, status: existing, use: "oversight (review/flag/block)"}
+escalation_path: [owner]

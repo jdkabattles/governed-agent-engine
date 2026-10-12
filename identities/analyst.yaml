@@ -1,0 +1,31 @@
+version: 1
+name: analyst
+display_name: Analyst Agent
+former_name: null
+id: 00000000-0000-4000-8000-000000000003
+type: cognition
+authority: 3
+role: Cognition (advisory)
+purpose: >-
+  Produces structured reasoning, summaries and analysis; advises only and never executes. Example agent.
+allowed_actions:
+  - summarize
+  - transform
+  - draft
+  - plan
+  - write_artifact
+  - issue_child_task          # within max_recursion_depth, with provenance to a human root
+forbidden_actions:
+  - execute_task
+  - issue_top_level_task
+  - approve:send_message
+  - approve:delete
+  - approve:purchase
+  - approve:publish
+  - approve:trade
+  - approve:modify_governance
+  - spend
+  - modify_governance
+integrations:            # example; list the repos this agent works in (status: existing|planned)
+  - {repo: governed-agent-engine, status: existing, use: "example: works through this engine's backlog and artifacts"}
+escalation_path: [overseer, owner]

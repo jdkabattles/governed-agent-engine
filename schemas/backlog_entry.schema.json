@@ -1,0 +1,161 @@
+{
+  "$id": "backlog_entry.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "created_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "entry_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "executor": {
+      "enum": [
+        "grok",
+        "cognition"
+      ]
+    },
+    "plan_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "requires_human_approval": {
+      "type": "boolean"
+    },
+    "schema_version": {
+      "description": "contract version; writers emit 2, readers accept 1 and 2",
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
+    },
+    "status": {
+      "enum": [
+        "pending",
+        "awaiting_approval",
+        "approved",
+        "in_progress",
+        "done",
+        "failed",
+        "rejected",
+        "blocked_agent"
+      ]
+    },
+    "status_history": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "awaiting_approval",
+              "approved",
+              "in_progress",
+              "done",
+              "failed",
+              "rejected",
+              "blocked_agent"
+            ]
+          }
+        },
+        "required": [
+          "status",
+          "at"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "task": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "depth": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "human_approval": {
+          "type": "boolean"
+        },
+        "inputs": {
+          "type": "object"
+        },
+        "issued_by": {
+          "description": "identity name (core/identity.py); top-level tasks need a human issuer",
+          "maxLength": 128,
+          "type": "string"
+        },
+        "parent_task_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "priority": {
+          "enum": [
+            "high",
+            "normal",
+            "low"
+          ]
+        },
+        "provenance": {
+          "description": "ancestor task ids, root first; length == depth",
+          "items": {
+            "pattern": "^[A-Za-z0-9_.\\-]{1,128}$",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "requires_grok": {
+          "type": "boolean"
+        },
+        "sensitive": {
+          "type": "boolean"
+        },
+        "task_id": {
+          "pattern": "^[A-Za-z0-9_.\\-]{1,128}$",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "market_watch",
+            "repo_maintain",
+            "email_triage",
+            "governance_check",
+            "research",
+            "custom"
+          ]
+        }
+      },
+      "required": [
+        "task_id",
+        "type"
+      ],
+      "title": "Task",
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "entry_id",
+    "task",
+    "created_at",
+    "status",
+    "requires_human_approval"
+  ],
+  "title": "BacklogEntry",
+  "type": "object"
+}

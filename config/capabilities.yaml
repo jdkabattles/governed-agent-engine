@@ -1,0 +1,309 @@
+# EXAMPLE: neutral scores so routing works out of the box. Regenerate with `gae bench --write-capabilities`.
+endpoints:
+  ai_horde:
+    error_rate: 0.0
+    model: any
+    p50_ms: 0
+    p95_ms: 0
+    scores:
+      coding:
+        n: 0
+        score: 0.5
+      honesty:
+        n: 0
+        score: 0.5
+      instruction:
+        n: 0
+        score: 0.5
+      long_context:
+        n: 0
+        score: 0.5
+      reasoning:
+        n: 0
+        score: 0.5
+      structured:
+        n: 0
+        score: 0.5
+  gemini:
+    error_rate: 0.0
+    model: gemini-3.8-flash
+    p50_ms: 0
+    p95_ms: 0
+    scores:
+      coding:
+        n: 0
+        score: 0.5
+      reasoning:
+        n: 0
+        score: 0.5
+  groq_gpt_oss_120b:
+    error_rate: 0.0
+    model: openai/gpt-oss-120b
+    p50_ms: 0
+    p95_ms: 0
+    scores:
+      coding:
+        n: 0
+        score: 0.5
+      honesty:
+        n: 0
+        score: 0.5
+      instruction:
+        n: 0
+        score: 0.5
+      long_context:
+        n: 0
+        score: 0.5
+      reasoning:
+        n: 0
+        score: 0.5
+      structured:
+        n: 0
+        score: 0.5
+  groq_gpt_oss_20b:
+    error_rate: 0.0
+    model: openai/gpt-oss-20b
+    p50_ms: 0
+    p95_ms: 0
+    scores:
+      coding:
+        n: 0
+        score: 0.5
+      honesty:
+        n: 0
+        score: 0.5
+      instruction:
+        n: 0
+        score: 0.5
+      long_context:
+        n: 0
+        score: 0.5
+      reasoning:
+        n: 0
+        score: 0.5
+      structured:
+        n: 0
+        score: 0.5
+  groq_qwen3_8_27b:
+    error_rate: 0.0
+    model: qwen/qwen3.8-27b
+    p50_ms: 0
+    p95_ms: 0
+    scores:
+      coding:
+        n: 0
+        score: 0.5
+      honesty:
+        n: 0
+        score: 0.5
+      instruction:
+        n: 0
+        score: 0.5
+      long_context:
+        n: 0
+        score: 0.5
+      reasoning:
+        n: 0
+        score: 0.5
+      structured:
+        n: 0
+        score: 0.5
+  llm7:
+    error_rate: 0.0
+    model: default
+    p50_ms: 0
+    p95_ms: 0
+    scores:
+      coding:
+        n: 0
+        score: 0.5
+      honesty:
+        n: 0
+        score: 0.5
+      instruction:
+        n: 0
+        score: 0.5
+      long_context:
+        n: 0
+        score: 0.5
+      reasoning:
+        n: 0
+        score: 0.5
+      structured:
+        n: 0
+        score: 0.5
+  openrouter:
+    error_rate: 0.0
+    model: openrouter/free
+    p50_ms: 0
+    p95_ms: 0
+    scores:
+      coding:
+        n: 0
+        score: 0.5
+      honesty:
+        n: 0
+        score: 0.5
+      reasoning:
+        n: 0
+        score: 0.5
+      structured:
+        n: 0
+        score: 0.5
+  openrouter_gemma4_31b:
+    error_rate: 0.0
+    model: google/gemma-4-31b-it:free
+    p50_ms: 0
+    p95_ms: 0
+    scores: {}
+  openrouter_laguna_s:
+    error_rate: 0.0
+    model: poolside/laguna-s-2.1:free
+    p50_ms: 0
+    p95_ms: 0
+    scores:
+      coding:
+        n: 0
+        score: 0.5
+      honesty:
+        n: 0
+        score: 0.5
+      instruction:
+        n: 0
+        score: 0.5
+      long_context:
+        n: 0
+        score: 0.5
+      reasoning:
+        n: 0
+        score: 0.5
+      structured:
+        n: 0
+        score: 0.5
+  openrouter_nemotron_super:
+    error_rate: 0.0
+    model: nvidia/nemotron-3-super-120b-a12b:free
+    p50_ms: 0
+    p95_ms: 0
+    scores:
+      coding:
+        n: 0
+        score: 0.5
+      honesty:
+        n: 0
+        score: 0.5
+      instruction:
+        n: 0
+        score: 0.5
+      long_context:
+        n: 0
+        score: 0.5
+      reasoning:
+        n: 0
+        score: 0.5
+      structured:
+        n: 0
+        score: 0.5
+  openrouter_north_code:
+    error_rate: 0.0
+    model: cohere/north-mini-code:free
+    p50_ms: 0
+    p95_ms: 0
+    scores:
+      coding:
+        n: 0
+        score: 0.5
+      honesty:
+        n: 0
+        score: 0.5
+      instruction:
+        n: 0
+        score: 0.5
+      long_context:
+        n: 0
+        score: 0.5
+      reasoning:
+        n: 0
+        score: 0.5
+      structured:
+        n: 0
+        score: 0.5
+  ovh:
+    error_rate: 0.0
+    model: Meta-Llama-3_3-70B-Instruct
+    p50_ms: 0
+    p95_ms: 0
+    scores:
+      coding:
+        n: 0
+        score: 0.5
+      honesty:
+        n: 0
+        score: 0.5
+      instruction:
+        n: 0
+        score: 0.5
+      long_context:
+        n: 0
+        score: 0.5
+      reasoning:
+        n: 0
+        score: 0.5
+      structured:
+        n: 0
+        score: 0.5
+  pollinations:
+    error_rate: 0.0
+    model: openai
+    p50_ms: 0
+    p95_ms: 0
+    scores:
+      coding:
+        n: 0
+        score: 0.5
+      honesty:
+        n: 0
+        score: 0.5
+      instruction:
+        n: 0
+        score: 0.5
+      long_context:
+        n: 0
+        score: 0.5
+      reasoning:
+        n: 0
+        score: 0.5
+      structured:
+        n: 0
+        score: 0.5
+generated_at: null
+note: EXAMPLE capabilities with neutral scores (0.5, n=0). Run `gae bench --write-capabilities`
+  to measure your own.
+source: null
+suite_version: example
+task_type_weights:
+  custom:
+    honesty: 0.2
+    instruction: 0.25
+    reasoning: 0.25
+    structured: 0.3
+  email_triage:
+    honesty: 0.2
+    instruction: 0.5
+    structured: 0.3
+  governance_check:
+    honesty: 0.2
+    reasoning: 0.3
+    structured: 0.5
+  market_watch:
+    honesty: 0.3
+    reasoning: 0.5
+    structured: 0.2
+  repo_maintain:
+    coding: 0.6
+    instruction: 0.2
+    structured: 0.2
+  research:
+    honesty: 0.4
+    long_context: 0.3
+    reasoning: 0.3

@@ -1,0 +1,40 @@
+{
+  "created_at": "2026-10-11T12:00:00Z",
+  "endpoint": "ovh",
+  "model": "Meta-Llama-3_3-70B-Instruct",
+  "raw_text": "{}",
+  "steps": [
+    {
+      "description": "Collect the relevant facts",
+      "evidence_required": false,
+      "failure_modes": [],
+      "index": 0,
+      "kind": "gather"
+    },
+    {
+      "description": "Draft the artifact",
+      "evidence_required": true,
+      "failure_modes": [
+        "inputs incomplete"
+      ],
+      "index": 1,
+      "kind": "execute"
+    },
+    {
+      "description": "Check the draft against facts",
+      "evidence_required": true,
+      "failure_modes": [],
+      "index": 2,
+      "kind": "verify"
+    },
+    {
+      "description": "Apply what verification revealed",
+      "evidence_required": false,
+      "failure_modes": [],
+      "index": 3,
+      "kind": "improve"
+    }
+  ],
+  "summary": "Facts first.",
+  "task_id": "child-1"
+}

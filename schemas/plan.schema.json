@@ -1,0 +1,74 @@
+{
+  "$id": "plan.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "created_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "endpoint": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "raw_text": {
+      "type": "string"
+    },
+    "steps": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "evidence_required": {
+            "type": "boolean"
+          },
+          "failure_modes": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "index": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "kind": {
+            "enum": [
+              "gather",
+              "analyze",
+              "execute",
+              "verify",
+              "improve",
+              null
+            ]
+          }
+        },
+        "required": [
+          "index",
+          "description"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_id",
+    "endpoint",
+    "model",
+    "created_at"
+  ],
+  "title": "Plan",
+  "type": "object"
+}
